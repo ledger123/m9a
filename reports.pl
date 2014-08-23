@@ -17,7 +17,7 @@ my $q  = new CGI;
 my $nf = new Number::Format( -int_curr_symbol => '' );
 my $tt = Template->new(
     {
-        INCLUDE_PATH => [ '/var/www/munshi9/tmpl', '/var/www/lighttpd/munshi9/tmpl' ],
+        INCLUDE_PATH => [ '/var/www/html/munshi9perl' ],
         INTERPOLATE  => 1,
     }
 ) || die "$Template::ERROR\n";
@@ -85,13 +85,143 @@ sub sample {
 }
 
 #----------------------------------------
-sub banquet {
+sub salaryslip {
     my $vars = {};
-    $vars->{hdr} = $dbs->query( 'SELECT * FROM banquet_header WHERE event_number=?', $id )->hash;
-    $vars->{dtl} = $dbs->query( 'SELECT * FROM banquet_lines WHERE event_number=?',  $id )->map_hashes('id');
-    $vars->{dayname} = $dbs->query( "SELECT TO_CHAR(event_date, 'DAY') FROM banquet_header WHERE event_number=?",  $id )->list;
-    $vars->{hdr}->{setup_detail} =~ s/\n/<br>/g;
+    $vars->{hdr} = $dbs->query( qq|
+    SELECT rownum id, hr_salary.dept,
+       hr_depts.dept_desc,
+       hr_salary.emp_num,
+       hr_emp.salute,
+       hr_emp.ntn,
+       hr_emp.doj,
+       hr_emp.nid,
+       hr_emp.emp_name,
+       hr_emp.fund_type,
+       hr_emp.bank_acc,
+       hr_emp.absents_ytd,
+       hr_salary.absents absents_mtd,
+       hr_emp.casual_allowed,
+       hr_emp.casual_mtd,
+       hr_emp.casual_balance,
+       hr_emp.sick_allowed,
+       hr_emp.sick_mtd,
+       hr_emp.sick_balance,
+       hr_emp.earned_opening,
+       hr_emp.earned_ytd,
+       hr_emp.earned_utilized,
+       hr_emp.earned_balance,
+       hr_emp.taxable_income,
+       hr_emp.tax_total,
+       hr_emp.tax_paid,
+       hr_emp.tax_total - hr_emp.tax_paid - hr_salary.inc_tax tax_balance,
+       hr_salary.extra_income,
+       hr_salary.extra_inc_tax,
+       hr_salary.desig,
+       hr_salary.cc,
+       hr_salary.grade,
+       hr_salary.scale,
+       hr_salary.status,
+       hr_salary.sal_month,
+       hr_salary.sal_year,
+       hr_salary.sal_date,
+       hr_salary.work_days,
+       hr_salary.absents,
+       hr_salary.basic_pay,
+       hr_emp.basic_pay master_basic,
+       hr_salary.house_rent,
+       hr_emp.house_rent master_hr,
+       hr_salary.convay,
+       hr_emp.convay master_convay,
+       hr_salary.utility,
+       hr_emp.utility master_utility,
+       hr_salary.medical_all,
+       hr_emp.medical_all master_medical,
+       hr_salary.np_all,
+       hr_emp.np_all master_npa,
+       hr_salary.hm_all,
+       hr_emp.hm_all master_hma,
+       hr_salary.teach_all,
+       hr_emp.teach_all master_teach,
+       hr_salary.cash_bonus,
+       hr_emp.cash_bonus master_bonus,
+       hr_salary.hod_all,
+       hr_emp.hod_all master_hod,
+       hr_salary.spl_relief,
+       hr_emp.spl_relief master_sra,
+       hr_salary.other_all1,
+       hr_salary.other_aamt1,
+       hr_emp.temp1 master_temp1,
+       hr_salary.temp1,
+       hr_emp.other_aamt1 master_other_aamt1,
+       hr_salary.other_all2,
+       hr_salary.other_aamt2,
+       hr_emp.other_aamt2 master_other_aamt2,
+       hr_salary.other_all3,
+       hr_salary.other_aamt3,
+       hr_emp.other_aamt3 master_other_aamt3,
+       hr_salary.other_all4,
+       hr_salary.extra_income other_aamt4,
+       hr_emp.other_aamt4 master_other_aamt4,
+       hr_salary.other_all5,
+       hr_salary.other_aamt5,
+       hr_emp.other_aamt5 master_other_aamt5,
+       hr_salary.other_all6,
+       hr_salary.other_aamt6,
+       hr_emp.other_aamt6 master_other_aamt6,
+       hr_salary.gross_pay gross_pay,
+       hr_emp.gross_pay master_gross,
+       hr_salary.inc_tax,
+       hr_salary.inc_tax tot_tax,
+       hr_salary.fund_ded,
+       hr_salary.tel,
+       hr_salary.gas,
+       hr_salary.elect,
+       hr_salary.water,
+       hr_salary.medical_ded,
+       hr_salary.adv_amt,
+       hr_salary.adv_int,
+       hr_salary.eobi_ded,
+       hr_salary.insure,
+       hr_salary.other_ded1,
+       hr_salary.other_damt1,
+       hr_salary.other_ded2,
+       hr_salary.other_damt2,
+       hr_salary.other_ded3,
+       hr_salary.other_damt3,
+       hr_salary.other_ded4,
+       hr_salary.other_damt4,
+       hr_salary.other_ded5,
+       hr_salary.other_damt5,
+       hr_salary.other_ded6,
+       hr_salary.other_damt6,
+       hr_salary.total_ded,
+       DECODE(hr_salary.gross_pay, 0, 0, hr_salary.total_ded + hr_emp.gross_pay - hr_salary.gross_pay) total_all_deduction,
+       hr_emp.last_salary,
+       hr_salary.gross_pay - hr_emp.last_salary Diff,
+       hr_salary.net_pay,
+       DECODE(hr_salary.gross_pay, 0, 0, hr_emp.gross_pay - hr_salary.gross_pay) leave_deduction,
+       hr_salary.doc_remarks,
+       hr_salary.posted,
+       hr_salary.closed,
+       hr_salary.date_created,
+       hr_salary.date_modified,
+       hr_salary.modified_by,
+       hr_salary.created_by
+  FROM hr_salary, hr_emp, hr_depts
+WHERE (hr_salary.books_id = 1)
+      AND (hr_salary.books_id = hr_emp.books_id)
+      AND (hr_salary.emp_num = hr_emp.emp_num)
+     AND (hr_salary.dept = hr_depts.dept)
+     AND (hr_salary.sal_month = '07')
+     AND (hr_salary.sal_year = '2014')
+     AND (hr_salary.emp_num BETWEEN 'W-014' AND 'W-016')
+     --AND (hr_emp.religion LIKE 'M')
+     --AND (hr_salary.grade = '08')
+ORDER BY dept, emp_num|
+)->map_hashes('emp_num');
+
     print $q->header();
+
     $tt->process( "$tmpl.tmpl", $vars ) || die $tt->error(), "\n";
 }
 
