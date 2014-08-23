@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+  <title>Guest Reservation - MUNSHI8</title>
+  <link rel="stylesheet" href="/munshi9/standard.css" type="text/css">
+  <link type="text/css" href="/munshi9/css/start/jquery-ui-1.8.10.custom.css" rel="Stylesheet">
+</head>
+
+<body onload="return window.print();">
+  <table width="100%" class="listtop">
+    <tr>
+      <th>Guest Reservation</th>
+    </tr>
+  </table>
+
+  <h1 class="noprint">Reg Card</h1>
+
+  <div style="align: center">
+    <b>Form "D"<br>
+    The Registration of foreigners Rules 1989<br>
+    (See Rule 11 and 15) Hotel Arrival Report</b>
+  </div>
+
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table width="100%" cellspacing="0" cellpadding="6" border=
+        "1">
+          <tr>
+            <th align="left">ID</th>
+
+            <td align="left">[% res.res_id %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Guest Name</th>
+
+            <td align="left">[% res.guest_name1 %]<br>[% res.guest_name2 %]
+            <br>[% res.guest_name3 %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Room Num</th>
+
+            <td align="left">[% res.room_num %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Adults</th>
+
+            <td align="left">[% res.adults %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Room Rate</th>
+
+            <td align="left">[% res.room_rate %] + Tax</td>
+          </tr>
+
+          <tr>
+            <th align="left">Passport</th>
+
+            <td align="left">[% res.passport %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Company</th>
+
+            <td align="left">[% res.company %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Checkin Date</th>
+
+            <td align="left">[% res.checkin_date %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Checkout Date</th>
+
+            <td align="left">[% res.checkout_date %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Notes</th>
+
+            <td align="left">Checkin Time: 14:00 hours<br>
+            Checkout Time: 12:00 hours<br>
+            Late checkout will be charged<br></td>
+          </tr>
+        </table>
+      </td>
+
+      <td valign="top">
+        <table width="100%" cellspacing="0" cellpadding="6" border=
+        "1">
+          <tr>
+            <th align="left">Coming From</th>
+
+            <td align="left">[% res.coming_from %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Mode of Payment</th>
+
+            <td align="left">[% res.payment_mode %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Advance</th>
+
+            <td align="left">[% res.advance %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">News Paper</th>
+            <td align="left">
+(i) Early Morning (08:00 AM)<br/>
+__ Nation __ Jang __ Khabrain __ Nawa-e-Waqt __ Express<br/>
+(ii) Late Newspaper (11:00 AM)<br/>
+__ Dawn __ The News
+            </td>
+          </tr>
+
+          <tr>
+            <th align="left">Tel/Cell #</th>
+
+            <td align="left">[% res.res_made_by_tell %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Guest Cell #</th>
+
+            <td align="left">[% res.mobile %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Email</th>
+
+            <td align="left">[% res.email %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Nation</th>
+
+            <td align="left">[% res.nation %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Purpose</th>
+
+            <td align="left">[% res.purpose %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Next Dest</th>
+
+            <td align="left">[% res.next_dest %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td colspan="2">This Hotel is independently owned and
+            operated by BILZ (Pvt.) Ltd.<br>
+            under a license from Ramada International, Inc.</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="4" align="right">USER: [% ramada_username %] AT [% ramada_checkin_time %]</td>
+    </tr>
+  </table>
+
+  <table width="100%">
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>__________________</td>
+
+      <td>__________________</td>
+    </tr>
+
+    <tr>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Guest</td>
+
+      <td>Reception</td>
+    </tr>
+  </table><br>
+  <br>
+
+  <div style="align: center">
+    <b>Form "D"<br>
+    The Registration of foreigners Rules 1989<br>
+    (See Rule 11 and 15) Hotel Arrival Report</b>
+  </div>
+
+  <table width="100%" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top">
+        <table width="100%" cellspacing="0" cellpadding="6" border=
+        "1">
+          <tr>
+            <th align="left">ID</th>
+
+            <td align="left">[% res.res_id %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Guest Name</th>
+
+            <td align="left">[% res.guest_name1 %]<br>[% res.guest_name2 %]<br>[% res.guest_name3 %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Room Num</th>
+
+            <td align="left">[% res.room_num %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Adults</th>
+
+            <td align="left">[% res.adults %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Room Rate</th>
+
+            <td align="left">[% res.room_rate %] + Tax</td>
+          </tr>
+
+          <tr>
+            <th align="left">Passport</th>
+
+            <td align="left">[% res.passport %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Profession</th>
+
+            <td align="left">[% res.profession %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Company</th>
+
+            <td align="left">[% res.company %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Address</th>
+
+            <td align="left">[% res.address %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Checkin Date</th>
+
+            <td align="left">[% res.checkin_date %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Checkout Date</th>
+
+            <td align="left">[% res.checkout_date %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Notes</th>
+
+            <td align="left">Checkin Time: 14:00 hours<br>
+            Checkout Time: 12:00 hours<br>
+            Late checkout will be charged<br></td>
+          </tr>
+        </table>
+      </td>
+
+      <td valign="top">
+        <table width="100%" cellspacing="0" cellpadding="6" border=
+        "1">
+          <tr>
+            <th align="left">Coming From</th>
+
+            <td align="left">[% res.coming_from %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Mode of Payment</th>
+
+            <td align="left">[% res.payment_mode %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Advance</th>
+
+            <td align="left">[% res.advance %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">News Paper</th>
+
+            <td align="left">
+(i) Early Morning (08:00 AM)<br/>
+__ Nation __ Jang __ Khabrain __ Nawa-e-Waqt __ Express<br/>
+(ii) Late Newspaper (11:00 AM)<br/>
+__ Dawn __ The News
+            </td>
+
+          </tr>
+
+          <tr>
+            <th align="left">Tel/Cell #</th>
+
+            <td align="left">[% res.res_made_by_tel %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Guest Cell #</th>
+
+            <td align="left">[% res.mobile %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Email</th>
+
+            <td align="left">[% res.email %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Nation</th>
+
+            <td align="left">[% res.nation %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Date of Birth</th>
+
+            <td align="left">[% res.dob %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">NIC Num</th>
+
+            <td align="left">[% res.nid_num %]</td>
+          </tr>
+
+          <tr>
+            <th align="left">Purpose</th>
+
+            <td align="left">[% res.purpose %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <th align="left">Next Dest</th>
+
+            <td align="left">[% res.next_dest %]&nbsp;</td>
+          </tr>
+
+          <tr>
+            <td colspan="2">This Hotel is independently owned and
+            operated by BILZ (Pvt.) Ltd.<br>
+            under a license from Ramada International, Inc.</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="4" align="right">USER: [% ramada_username %] AT [% ramada_checkin_time %]</td>
+    </tr>
+  </table>
+
+  <table width="100%">
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+
+    <tr>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>__________________</td>
+
+      <td>__________________</td>
+    </tr>
+
+    <tr>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>Guest</td>
+
+      <td>Reception</td>
+    </tr>
+  </table>
+</body>
+</html>
