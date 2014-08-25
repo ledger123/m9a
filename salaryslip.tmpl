@@ -2,6 +2,9 @@
     <head>
         <title>Aitchison College Salary Slip</title>
         <link rel="stylesheet" href="/munshi9/standard.css" type="text/css">
+        <STYLE TYPE="text/css">
+         P.breakhere {page-break-before: always}
+        </STYLE>
     </head>
 <body>
 
@@ -11,7 +14,7 @@
         <tr> <!-- First section -->
             <td>
                 <table width="100%" border=1 cellpadding=3 cellspacing=0>
-                    <tr><th colspan=3>Aitchison College, Lahore<br/>Payslip for the month of June 2014</th></tr>
+                    <tr><th colspan=3>Aitchison College, Lahore<br/>Payslip for the month of [% hdr.$id.sal_month %]-2014</th></tr>
                     <tr><td>
                             <table width="100%">
                                 <tr>
@@ -20,7 +23,7 @@
                                 </tr>
                                 <tr>
                                     <td>Employee ID</td>
-                                    <td>[% hdr.$id.emp_num %]</td>
+                                    <td>[% hdr.$id.emp_num2 %]</td>
                                 </tr>
                                 <tr>
                                     <td>Employee Type</td>
@@ -59,7 +62,7 @@
                                 </tr>
                                 <tr>
                                     <td>Address</td>
-                                    <td>(address)</td>
+                                    <td>DAVIS ROAD, LAHORE</td>
                                 </tr>
                              </table>
                           </td>    
@@ -84,11 +87,14 @@
                                             <tr><td>HM All</td><td align="right">[% nf.format_number(hdr.$id.master_hma,0) %]</td></tr>
                                             <tr><td>HOD All</td><td align="right">[% nf.format_number(hdr.$id.master_hod,0) %]</td></tr>
                                             <tr><td>Ad.Rlf12</td><td align="right">[% nf.format_number(hdr.$id.master_sra,0) %]</td></tr>
-                                            <tr><td>Spl Allow 1</td><td align="right">[% nf.format_number(hdr.$id.master_other_aamt6,0) %]</td></tr>
-                                            <tr><td>Spl Allow 2</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                            <tr><td>Spl Allow 3</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                            <tr><td>Ad.Relf1</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
+                                            <tr><td>Spl.Allow</td><td align="right">[% nf.format_number(hdr.$id.master_other_aamt6,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_all1 %]</td><td align="right">[% nf.format_number(hdr.$id.master_other_aamt1,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_all2 %]</td><td align="right">[% nf.format_number(hdr.$id.master_other_aamt2,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_all3 %]</td><td align="right">[% nf.format_number(hdr.$id.master_other_aamt3,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_all4 %]</td><td align="right">[% nf.format_number(hdr.$id.master_other_aamt4,0) %]</td></tr>
                                             <tr><td>D.A (10)</td><td align="right">[% nf.format_number(hdr.$id.master_temp1,0) %]</td></tr>
+                                            <tr><td>&nbsp;</td><td align="right">&nbsp;</td></tr>
+                                            <tr><td>&nbsp;</td><td align="right">&nbsp;</td></tr>
                                             <tr><td>&nbsp;</td><td align="right">&nbsp;</td></tr>
                                             <tr><th>GROSS PAY</th><th align="right">[% nf.format_number(hdr.$id.master_gross,0) %]</th></tr>
                                          </table>
@@ -103,10 +109,13 @@
                                             <tr><td>Medical Ded</td><td align="right">[% nf.format_number(hdr.$id.medial_ded,0) %]</td></tr>
                                             <tr><td>Adv Amt</td><td align="right">[% nf.format_number(hdr.$id.adv_amt,0) %]</td></tr>
                                             <tr><td>Adv Int</td><td align="right">[% nf.format_number(hdr.$id.adv_int,0) %]</td></tr>
-                                            <tr><td>G.Insure</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                            <tr><td>H.Insure</td><td align="right">[% nf.format_number(hdr.$id.insure,0) %]</td></tr>
+                                            <tr><td>G.Insure</td><td align="right">[% nf.format_number(hdr.$id.insure,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_ded5 %]</td><td align="right">[% nf.format_number(hdr.$id.other_damt5,0) %]</td></tr>
                                             <tr><td>Water</td><td align="right">[% nf.format_number(hdr.$id.water,0) %]</td></tr>
                                             <tr><td>EOBI Ded</td><td align="right">[% nf.format_number(hdr.$id.eobi_ded,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_ded1 %]</td><td align="right">[% nf.format_number(hdr.$id.other_damt1,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_ded2 %]</td><td align="right">[% nf.format_number(hdr.$id.other_damt2,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.other_ded3 %]</td><td align="right">[% nf.format_number(hdr.$id.other_damt3,0) %]</td></tr>
                                             <tr><td>LwoP</td><td align="right">[% nf.format_number(hdr.$id.leave_deduction,0) %]</td></tr>
                                             <tr><th>TOTAL PAY</th><th align="right">[% nf.format_number(hdr.$id.total_all_deduction,0) %]</th></tr>
                                          </table>
@@ -114,12 +123,16 @@
                                 </tr>
                                 <tr><td colspan=2 align="left">
                                         <b>Net Amount of Rs: [% nf.format_number(hdr.$id.net_pay,0) %] for the month of<br/>
-                                            JUNE 2014 has been transferred to the<br/>
-                                            bank a/c [% hdr.$id.bank_acc %] of NBP on [% hdr.$id.sal_date %]<br/><br/><br/></b>
+                                            [% hdr.$id.sal_month %]-[% hdr.$id.sal_year %] has been transferred to the<br/>
+                                            bank a/c [% hdr.$id.bank_acc %] of NBP on [% hdr.$id.print_date %]<br/><br/><br/></b>
                                         Prepared by: Shahid Taj<br/>
                                         Accountant Jr., Accounts Department<br/><br/><br/>
                                         This is computer generated document<br/> 
                                         and does not require signatures.</td></tr>
+                                <tr><td colspan=2 align="left">
+                                <br/><br/><br/><br/><br/><br/>
+                                <b>Vice Principal (Admin)/Bursar</b>
+                                </td></tr>
                             </table>
                         </td>
                         <td valign="top">
@@ -142,8 +155,7 @@
                                         <tr><td>Annual Taxable from Salary</td><td align="right">[% nf.format_number(hdr.$id.taxable_income,0) %]</td></tr>
                                         <tr><td>Annual Tax on salary income</td><td align="right">[% nf.format_number(hdr.$id.tax_total,0) %]</td></tr>
                                         <tr><td>Withholding Tax paid by employee</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>YTD tax deducted</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>Total tax paid todate</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
+                                        <tr><td>YTD tax deducted</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
                                         <tr><td>Employee NTN</td><td align="right">[% hdr.$id.ntn %]</td></tr>
                                         <tr><td>Employer NTN</td><td align="right">4199854-5</td></tr>
                                     </table>
@@ -177,8 +189,8 @@
                                                     <tr><td>Annual Sick</td><td align="right">[% nf.format_number(hdr.$id.sick_allowed,0) %]</td></tr>
                                                     <tr><td>Sick YTD</td><td align="right">[% nf.format_number(hdr.$id.sick_mtd,0) %]</td></tr>
                                                     <tr><td>Sick Bal</td><td align="right">[% nf.format_number(hdr.$id.sick_balance,0) %]</td></tr>
-                                                    <tr><td>Absents YTD</td><td align="right">[% nf.format_number(hdr.$id.absents,0) %]</td></tr>
-                                                    <tr><td>LwoP YTD</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
+                                                    <tr><td>Absents</td><td align="right">[% nf.format_number(hdr.$id.absents,0) %]</td></tr>
+                                                    <tr><td>Absents YTD</td><td align="right">[% nf.format_number(hdr.$id.absents_ytd,0) %]</td></tr>
                                                 </table>
                                             </td>
                                         </tr>
@@ -197,7 +209,7 @@
             </td>
         </tr>
     </table>
-
+<P CLASS="breakhere">
 [% END %]
 
 </body>

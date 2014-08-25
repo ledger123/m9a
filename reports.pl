@@ -84,14 +84,45 @@ sub sample {
 |;
 }
 
+sub ask_salaryslip {
+    &report_header('Print salary slip');
+
+    print qq|
+<form action="reports.pl" method="post">
+Sal Month: <input type=text size=3 name=sal_month value='08'><br/>
+Sal Year: <input type=text size=6 name=sal_year value='2014'><br/>
+Emp1: <input type=text size=10 name=emp_num1 value=''><br/>
+Emp2: <input type=text size=10 name=emp_num2 value=''><br/>
+Department: <input type=text name=dept size=3 value='%'><br/>
+Religion: <input type=text name=religion size=3 value='%'><br/>
+Grade: <input type=text name=grade size=3 value='04'><br/>
+    <hr/>
+    <input type=hidden name=nextsub value="salaryslip">
+    <input type=hidden name=tmpl value="salaryslip">
+    <input type=submit name=action class=submit value="Print">
+</form>
+|;
+ 
+}
+
 #----------------------------------------
 sub salaryslip {
     my $vars = {};
     $vars->{nf} = $nf;
+
+my $sal_month  = $q->param('sal_month');
+my $sal_year   = $q->param('sal_year');
+my $emp_num1   = $q->param('emp_num1');
+my $emp_num2   = $q->param('emp_num2');
+my $dept   = $q->param('dept');
+my $religion   = $q->param('religion');
+my $grade   = $q->param('grade');
+
     $vars->{hdr} = $dbs->query( qq|
     SELECT rownum id, hr_salary.dept,
        hr_depts.dept_desc,
-       hr_salary.emp_num,
+       hr_emp.emp_num,
+       hr_emp.emp_num emp_num2,
        hr_emp.salute,
        hr_emp.ntn,
        hr_emp.doj,
@@ -208,19 +239,22 @@ sub salaryslip {
        hr_salary.date_modified,
        hr_salary.modified_by,
        hr_salary.created_by,
+       sysdate as print_date,
+       (SELECT SUM(inc_tax) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') inc_tax_ytd,
+       (SELECT SUM(absents) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') absents_ytd,
        (SELECT NVL(SUM(debit_amt-credit_amt),0)*-1 FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_fund_acc AND je_date >= '1-jul-2013') fund_balance,
        (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-2013') temp_advance,
-       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-203') perm_advance
+       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-203') perm_advance
   FROM hr_salary, hr_emp, hr_depts
 WHERE (hr_salary.books_id = 1)
       AND (hr_salary.books_id = hr_emp.books_id)
       AND (hr_salary.emp_num = hr_emp.emp_num)
      AND (hr_salary.dept = hr_depts.dept)
-     AND (hr_salary.sal_month = '08')
-     AND (hr_salary.sal_year = '2014')
-     AND (hr_salary.emp_num BETWEEN 'A-028' AND 'A-028')
-     --AND (hr_emp.religion LIKE 'M')
-     --AND (hr_salary.grade = '08')
+     AND (hr_salary.sal_month = '$sal_month')
+     AND (hr_salary.sal_year = '$sal_year')
+     AND (hr_salary.emp_num BETWEEN '$emp_num1' AND '$emp_num2')
+     AND (hr_emp.religion LIKE '$religion')
+     AND (hr_salary.grade = '$grade')
 ORDER BY dept, emp_num|
 )->map_hashes('emp_num');
 
