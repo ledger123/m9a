@@ -87,6 +87,7 @@ sub sample {
 #----------------------------------------
 sub salaryslip {
     my $vars = {};
+    $vars->{nf} = $nf;
     $vars->{hdr} = $dbs->query( qq|
     SELECT rownum id, hr_salary.dept,
        hr_depts.dept_desc,
@@ -206,15 +207,18 @@ sub salaryslip {
        hr_salary.date_created,
        hr_salary.date_modified,
        hr_salary.modified_by,
-       hr_salary.created_by
+       hr_salary.created_by,
+       (SELECT NVL(SUM(debit_amt-credit_amt),0)*-1 FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_fund_acc AND je_date >= '1-jul-2013') fund_balance,
+       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-2013') temp_advance,
+       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-203') perm_advance
   FROM hr_salary, hr_emp, hr_depts
 WHERE (hr_salary.books_id = 1)
       AND (hr_salary.books_id = hr_emp.books_id)
       AND (hr_salary.emp_num = hr_emp.emp_num)
      AND (hr_salary.dept = hr_depts.dept)
-     AND (hr_salary.sal_month = '07')
+     AND (hr_salary.sal_month = '08')
      AND (hr_salary.sal_year = '2014')
-     AND (hr_salary.emp_num BETWEEN 'W-014' AND 'W-016')
+     AND (hr_salary.emp_num BETWEEN 'A-028' AND 'A-028')
      --AND (hr_emp.religion LIKE 'M')
      --AND (hr_salary.grade = '08')
 ORDER BY dept, emp_num|
