@@ -9,12 +9,12 @@
 <body>
 
 [% FOREACH id IN hdr.keys.sort %]
-
+<div align="right">Private and Confidential</div>
     <table width="100%" border=1 cellpadding=3 cellspacing=0>
         <tr> <!-- First section -->
             <td>
                 <table width="100%" border=1 cellpadding=3 cellspacing=0>
-                    <tr><th colspan=3>Aitchison College, Lahore<br/>Payslip for the month of [% hdr.$id.sal_month %]-2014</th></tr>
+                    <tr><th colspan=3>Aitchison College, Lahore<br/>Payslip for the month of [% hdr.$id.sal_month2 %] 2014</th></tr>
                     <tr><td>
                             <table width="100%">
                                 <tr>
@@ -27,15 +27,11 @@
                                 </tr>
                                 <tr>
                                     <td>Employee Type</td>
-                                    <td>Permanent</td>
+                                    <td>[% hdr.$id.emp_type %]</td>
                                 </tr>
                                 <tr>
                                     <td>Designation</td>
                                     <td>[% hdr.$id.desig %]</td>
-                                </tr>
-                                <tr>
-                                    <td>College Grade</td>
-                                    <td>[% hdr.$id.scale %]</td>
                                 </tr>
                              </table>
                          </td>
@@ -97,6 +93,7 @@
                                             <tr><td>&nbsp;</td><td align="right">&nbsp;</td></tr>
                                             <tr><td>&nbsp;</td><td align="right">&nbsp;</td></tr>
                                             <tr><th>GROSS PAY</th><th align="right">[% nf.format_number(hdr.$id.master_gross,0) %]</th></tr>
+                                            <tr><th>NET PAY</th><th align="right">[% nf.format_number(hdr.$id.net_pay,0) %]</th></tr>
                                          </table>
                                      </td>
                                      <td valign="top">
@@ -117,13 +114,13 @@
                                             <tr><td>[% hdr.$id.other_ded2 %]</td><td align="right">[% nf.format_number(hdr.$id.other_damt2,0) %]</td></tr>
                                             <tr><td>[% hdr.$id.other_ded3 %]</td><td align="right">[% nf.format_number(hdr.$id.other_damt3,0) %]</td></tr>
                                             <tr><td>LwoP</td><td align="right">[% nf.format_number(hdr.$id.leave_deduction,0) %]</td></tr>
-                                            <tr><th>TOTAL PAY</th><th align="right">[% nf.format_number(hdr.$id.total_all_deduction,0) %]</th></tr>
+                                            <tr><th>TOTAL DED.</th><th align="right">[% nf.format_number(hdr.$id.total_all_deduction,0) %]</th></tr>
                                          </table>
                                      </td>
                                 </tr>
                                 <tr><td colspan=2 align="left">
                                         <b>Net Amount of Rs: [% nf.format_number(hdr.$id.net_pay,0) %] for the month of<br/>
-                                            [% hdr.$id.sal_month %]-[% hdr.$id.sal_year %] has been transferred to the<br/>
+                                            [% hdr.$id.sal_month2 %] [% hdr.$id.sal_year %] has been transferred to the<br/>
                                             bank a/c [% hdr.$id.bank_acc %] of NBP on [% hdr.$id.print_date %]<br/><br/><br/></b>
                                         Prepared by: Shahid Taj<br/>
                                         Accountant Jr., Accounts Department<br/><br/><br/>
@@ -154,8 +151,9 @@
                                         <tr><th colspan=2>Income Tax</th></tr>
                                         <tr><td>Annual Taxable from Salary</td><td align="right">[% nf.format_number(hdr.$id.taxable_income,0) %]</td></tr>
                                         <tr><td>Annual Tax on salary income</td><td align="right">[% nf.format_number(hdr.$id.tax_total,0) %]</td></tr>
-                                        <tr><td>Withholding Tax paid by employee</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>YTD tax deducted</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
+                                        <tr><td>Withholding tax deducted by employer</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
+                                        <tr><td>Withholding tax paid by employee</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
+                                        <tr><td>Total tax paid todate</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
                                         <tr><td>Employee NTN</td><td align="right">[% hdr.$id.ntn %]</td></tr>
                                         <tr><td>Employer NTN</td><td align="right">4199854-5</td></tr>
                                     </table>
