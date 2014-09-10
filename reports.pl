@@ -246,7 +246,7 @@ my $grade   = $q->param('grade');
        (SELECT SUM(absents) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') absents_ytd,
        (SELECT NVL(SUM(debit_amt-credit_amt),0)*-1 FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_fund_acc AND je_date >= '1-jul-2013') fund_balance,
        (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-2013') temp_advance,
-       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-203') perm_advance
+       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-2013') perm_advance
   FROM hr_salary, hr_emp, hr_depts
 WHERE (hr_salary.books_id = 1)
       AND (hr_salary.books_id = hr_emp.books_id)

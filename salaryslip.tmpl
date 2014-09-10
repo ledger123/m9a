@@ -99,11 +99,11 @@
                                      <td valign="top">
                                           <table width="100%">
                                             <tr><td>Income Tax</td><td align="right">[% nf.format_number(hdr.$id.tot_tax,0) %]</td></tr>
-                                            <tr><td>CPF</td><td align="right">[% nf.format_number(hdr.$id.fund_ded,0) %]</td></tr>
+                                            <tr><td>CPF/GPF</td><td align="right">[% nf.format_number(hdr.$id.fund_ded,0) %]</td></tr>
                                             <tr><td>Tel</td><td align="right">[% nf.format_number(hdr.$id.tel,0) %]</td></tr>
                                             <tr><td>Gas</td><td align="right">[% nf.format_number(hdr.$id.gas,0) %]</td></tr>
                                             <tr><td>Elect</td><td align="right">[% nf.format_number(hdr.$id.elect,0) %]</td></tr>
-                                            <tr><td>Medical Ded</td><td align="right">[% nf.format_number(hdr.$id.medial_ded,0) %]</td></tr>
+                                            <tr><td>Medical Ded</td><td align="right">[% nf.format_number(hdr.$id.medical_ded,0) %]</td></tr>
                                             <tr><td>Adv Amt</td><td align="right">[% nf.format_number(hdr.$id.adv_amt,0) %]</td></tr>
                                             <tr><td>Adv Int</td><td align="right">[% nf.format_number(hdr.$id.adv_int,0) %]</td></tr>
                                             <tr><td>G.Insure</td><td align="right">[% nf.format_number(hdr.$id.insure,0) %]</td></tr>
@@ -163,7 +163,7 @@
                                         <tr><th colspan=2>Fund/Loan Record</th></tr>
                                         <tr><td>Temporary Advance</td><td align="right">[% nf.format_number(hdr.$id.temp_advance,0) %]</td></tr>
                                         <tr><td>Permanent Advance</td><td align="right">[% nf.format_number(hdr.$id.perm_advance,0) %]</td></tr>
-                                        <tr><td>GPF/CPF Fund Balance</td><td align="right">[% nf.format_number(hdr.$id.fund_balance,0) %]</td></tr>
+                                        <tr><td>GPF/CPF Fund Balance</td><td align="right">[% nf.format_number(hdr.$id.fund_balance + hdr.$id.fund_ded,0) %]</td></tr>
                                         <tr><td>Total</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
                                         <tr><td>Other Advance</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
                                     </table>
