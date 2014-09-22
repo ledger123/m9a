@@ -206,6 +206,7 @@ my $grade   = $q->param('grade');
        hr_salary.inc_tax,
        hr_salary.inc_tax tot_tax,
        hr_salary.fund_ded,
+       DECODE(hr_emp.fund_type, 'CPF', hr_salary.fund_ded * 2, 'GPF', hr_salary.fund_ded, 0) fund_ded2,
        hr_salary.tel,
        hr_salary.gas,
        hr_salary.elect,

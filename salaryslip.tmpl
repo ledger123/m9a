@@ -161,9 +161,9 @@
                                 <tr><td>
                                     <table width="100%" border=0 cellpadding=3 cellspacing=0>
                                         <tr><th colspan=2>Fund/Loan Record</th></tr>
-                                        <tr><td>Temporary Advance</td><td align="right">[% nf.format_number(hdr.$id.temp_advance,0) %]</td></tr>
+                                        <tr><td>Temporary Advance</td><td align="right">[% nf.format_number(hdr.$id.temp_advance - hdr.$id.adv_amt,0) %]</td></tr>
                                         <tr><td>Permanent Advance</td><td align="right">[% nf.format_number(hdr.$id.perm_advance,0) %]</td></tr>
-                                        <tr><td>GPF/CPF Fund Balance</td><td align="right">[% nf.format_number(hdr.$id.fund_balance + hdr.$id.fund_ded,0) %]</td></tr>
+                                        <tr><td>GPF/CPF Fund Balance</td><td align="right">[% nf.format_number(hdr.$id.fund_balance + hdr.$id.fund_ded2 ,0) %]</td></tr>
                                         <tr><td>Total</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
                                         <tr><td>Other Advance</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
                                     </table>
