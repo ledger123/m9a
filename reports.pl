@@ -118,10 +118,10 @@ my $dept   = $q->param('dept');
 my $religion   = $q->param('religion');
 my $grade   = $q->param('grade');
 
-    $vars->{hdr} = $dbs->query( qq|
+    $vars->{hdr} = $dbs->query( qq/
     SELECT rownum id, hr_salary.dept,
        hr_depts.dept_desc,
-       hr_emp.emp_num,
+       hr_emp.dept || hr_emp.emp_num emp_num,
        hr_emp.emp_num emp_num2,
        hr_emp.salute,
        hr_emp.ntn,
@@ -258,7 +258,7 @@ WHERE (hr_salary.books_id = 1)
      AND (hr_salary.emp_num BETWEEN '$emp_num1' AND '$emp_num2')
      AND (hr_emp.religion LIKE '$religion')
      AND (hr_salary.grade = '$grade')
-ORDER BY dept, emp_num|
+ORDER BY dept, emp_num/
 )->map_hashes('emp_num');
 
     print $q->header();
