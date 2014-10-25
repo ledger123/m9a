@@ -118,7 +118,7 @@ my $dept   = $q->param('dept');
 my $religion   = $q->param('religion');
 my $grade   = $q->param('grade');
 
-    $vars->{hdr} = $dbs->query( qq/
+    $vars->{hdr} = $dbs->query( qq~
     SELECT rownum id, hr_salary.dept,
        hr_depts.dept_desc,
        hr_emp.dept || hr_emp.emp_num emp_num,
@@ -247,7 +247,14 @@ my $grade   = $q->param('grade');
        (SELECT SUM(absents) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') absents_ytd,
        (SELECT NVL(SUM(debit_amt-credit_amt),0)*-1 FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_fund_acc AND je_date >= '1-jul-2013') fund_balance,
        (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-2013') temp_advance,
-       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-2013') perm_advance
+       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-2013') perm_advance,
+       (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Extra Classes') extra_classes,
+       (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Extra Duty') extra_duty,
+       (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Eid/Christmas 1') eid_christmas1,
+       (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Eid/Christmas 2') eid_christmas2,
+       (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Leave Payment') leave_payment,
+       (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Other') other,
+       (SELECT NVL(SUM(amount),0) FROM hr_advtax WHERE hr_advtax.emp_num = hr_salary.emp_num) adv_tax
   FROM hr_salary, hr_emp, hr_depts
 WHERE (hr_salary.books_id = 1)
       AND (hr_salary.books_id = hr_emp.books_id)
@@ -258,7 +265,7 @@ WHERE (hr_salary.books_id = 1)
      AND (hr_salary.emp_num BETWEEN '$emp_num1' AND '$emp_num2')
      AND (hr_emp.religion LIKE '$religion')
      AND (hr_salary.grade = '$grade')
-ORDER BY dept, emp_num/
+ORDER BY dept, emp_num~
 )->map_hashes('emp_num');
 
     print $q->header();

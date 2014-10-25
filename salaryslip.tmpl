@@ -137,12 +137,12 @@
                                 <tr><td>
                                     <table width="100%" border=0 cellpadding=3 cellspacing=0>
                                         <tr><th colspan=2>Extra Income</th></tr>
-                                        <tr><td>Extra Classes</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>Extra Duty</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>Eid/Christmas 1</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>Eid/Christmas 2</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>Leave Payment</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
-                                        <tr><td>Other</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
+                                        <tr><td>Extra Classes</td><td align="right">[% nf.format_number(hdr.$id.extra_classes,0) %]</td></tr>
+                                        <tr><td>Extra Duty</td><td align="right">[% nf.format_number(hdr.$id.extra_duty,0) %]</td></tr>
+                                        <tr><td>Eid/Christmas 1</td><td align="right">[% nf.format_number(hdr.$id.eid_christmas1,0) %]</td></tr>
+                                        <tr><td>Eid/Christmas 2</td><td align="right">[% nf.format_number(hdr.$id.eid_christmas2,0) %]</td></tr>
+                                        <tr><td>Leave Payment</td><td align="right">[% nf.format_number(hdr.$id.leave_payment,0) %]</td></tr>
+                                        <tr><td>Other</td><td align="right">[% nf.format_number(hdr.$id.other,0) %]</td></tr>
                                         <tr><td>Total</td><td align="right">[% nf.format_number(hdr.$id.extra_income,0) %]</td></tr>
                                     </table>
                                 </td></tr>
@@ -152,7 +152,7 @@
                                         <tr><td>Annual Taxable from Salary</td><td align="right">[% nf.format_number(hdr.$id.taxable_income,0) %]</td></tr>
                                         <tr><td>Annual Tax on salary income</td><td align="right">[% nf.format_number(hdr.$id.tax_total,0) %]</td></tr>
                                         <tr><td>Withholding tax deducted by employer</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
-                                        <tr><td>Withholding tax paid by employee</td><td align="right">[% nf.format_number(hdr.$id.fld,0) %]</td></tr>
+                                        <tr><td>Withholding tax paid by employee</td><td align="right">[% nf.format_number(hdr.$id.adv_tax,0) %]</td></tr>
                                         <tr><td>Total tax paid todate</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
                                         <tr><td>Employee NTN</td><td align="right">[% hdr.$id.ntn %]</td></tr>
                                         <tr><td>Employer NTN</td><td align="right">4199854-5</td></tr>
