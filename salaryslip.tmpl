@@ -153,7 +153,7 @@
                                         <tr><td>Annual Tax on salary income</td><td align="right">[% nf.format_number(hdr.$id.tax_total,0) %]</td></tr>
                                         <tr><td>Withholding tax deducted by employer</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
                                         <tr><td>Withholding tax paid by employee</td><td align="right">[% nf.format_number(hdr.$id.adv_tax,0) %]</td></tr>
-                                        <tr><td>Total tax paid todate</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd,0) %]</td></tr>
+                                        <tr><td>Total tax paid todate</td><td align="right">[% nf.format_number(hdr.$id.inc_tax_ytd + hdr.$id.adv_tax,0) %]</td></tr>
                                         <tr><td>Employee NTN</td><td align="right">[% hdr.$id.ntn %]</td></tr>
                                         <tr><td>Employer NTN</td><td align="right">4199854-5</td></tr>
                                     </table>
