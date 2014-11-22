@@ -117,7 +117,13 @@ my $emp_num2   = $q->param('emp_num2');
 my $dept   = $q->param('dept');
 my $religion   = $q->param('religion');
 my $grade   = $q->param('grade');
-
+my $sal_date = $dbs->query(qq|
+    select max(sal_date) 
+    from hr_salary 
+    where sal_month='$sal_month' 
+    and sal_year='$sal_year'|
+)->list;
+   
     $vars->{hdr} = $dbs->query( qq~
     SELECT rownum id, hr_salary.dept,
        hr_depts.dept_desc,
@@ -245,9 +251,9 @@ my $grade   = $q->param('grade');
        DECODE(hr_emp.scale, '00', 'Contractual', 'Regular') emp_type,
        (SELECT SUM(inc_tax) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') inc_tax_ytd,
        (SELECT SUM(absents) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') absents_ytd,
-       (SELECT NVL(SUM(debit_amt-credit_amt),0)*-1 FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_fund_acc AND je_date >= '1-jul-2013') fund_balance,
-       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-2013') temp_advance,
-       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-2013') perm_advance,
+       (SELECT NVL(SUM(debit_amt-credit_amt),0)*-1 FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_fund_acc AND je_date >= '1-jul-2013' and je_date <= '$sal_date') fund_balance,
+       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-2013' and je_date <= '$sal_date') temp_advance,
+       (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-2013' and je_date <= '$sal_date') perm_advance,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Extra Classes') extra_classes,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Extra Duty') extra_duty,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Eid/Christmas 1') eid_christmas1,
