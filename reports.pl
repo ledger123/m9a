@@ -123,7 +123,7 @@ my $sal_date = $dbs->query(qq|
     where sal_month='$sal_month' 
     and sal_year='$sal_year'|
 )->list;
-   
+
     $vars->{hdr} = $dbs->query( qq~
     SELECT rownum id, hr_salary.dept,
        hr_depts.dept_desc,
@@ -261,10 +261,12 @@ my $sal_date = $dbs->query(qq|
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Leave Payment') leave_payment,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND etype = 'Other') other,
        (SELECT NVL(SUM(amount),0) FROM hr_advtax WHERE hr_advtax.emp_num = hr_salary.emp_num) adv_tax
-  FROM hr_salary, hr_emp, hr_depts
+  FROM hr_salary, hr_emp2 hr_emp, hr_depts
 WHERE (hr_salary.books_id = 1)
       AND (hr_salary.books_id = hr_emp.books_id)
       AND (hr_salary.emp_num = hr_emp.emp_num)
+      AND (hr_salary.sal_month = hr_emp.sal_month)
+      AND (hr_salary.sal_year = hr_emp.sal_year)
      AND (hr_salary.dept = hr_depts.dept)
      AND (hr_salary.sal_month = '$sal_month')
      AND (hr_salary.sal_year = '$sal_year')
