@@ -110,6 +110,12 @@ sub salaryslip {
     my $vars = {};
     $vars->{nf} = $nf;
 
+    $dbs->query('
+update hr_gllines set je_date = (select je_date from hr_glhdr where hr_glhdr.je_id = hr_gllines.je_id)
+where je_date is null
+');
+    $dbh->commit;
+
 my $sal_month  = $q->param('sal_month');
 my $sal_year   = $q->param('sal_year');
 my $emp_num1   = $q->param('emp_num1');
