@@ -130,6 +130,7 @@ my $sal_date = $dbs->query(qq|
     and sal_year='$sal_year'|
 )->list;
 
+    $vars->{sal_year} = $sal_year;
     $vars->{hdr} = $dbs->query( qq~
     SELECT rownum id, hr_salary.dept,
        hr_depts.dept_desc,
