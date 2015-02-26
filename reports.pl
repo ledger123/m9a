@@ -142,6 +142,7 @@ my $sal_date = $dbs->query(qq|
        hr_emp.nid,
        hr_emp.emp_name,
        hr_emp.fund_type,
+       decode(hr_emp.pymt_type, 'BANK', 'NBP', 'MCB') pymt_type,
        hr_emp.bank_acc,
        hr_emp.absents_ytd,
        hr_salary.absents absents_mtd,

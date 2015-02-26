@@ -54,7 +54,7 @@
                                 </tr>
                                 <tr>
                                     <td>Bank Name</td>
-                                    <td>NBP</td>
+                                    <td>[% hdr.$id.pymt_type %]</td>
                                 </tr>
                                 <tr>
                                     <td>Address</td>
@@ -99,7 +99,7 @@
                                      <td valign="top">
                                           <table width="100%">
                                             <tr><td>Income Tax</td><td align="right">[% nf.format_number(hdr.$id.tot_tax,0) %]</td></tr>
-                                            <tr><td>CPF/GPF</td><td align="right">[% nf.format_number(hdr.$id.fund_ded,0) %]</td></tr>
+                                            <tr><td>[% hdr.$id.fund_type %]</td><td align="right">[% nf.format_number(hdr.$id.fund_ded,0) %]</td></tr>
                                             <tr><td>Tel</td><td align="right">[% nf.format_number(hdr.$id.tel,0) %]</td></tr>
                                             <tr><td>Gas</td><td align="right">[% nf.format_number(hdr.$id.gas,0) %]</td></tr>
                                             <tr><td>Elect</td><td align="right">[% nf.format_number(hdr.$id.elect,0) %]</td></tr>
@@ -121,7 +121,7 @@
                                 <tr><td colspan=2 align="left">
                                         <b>Net Amount of Rs: [% nf.format_number(hdr.$id.net_pay,0) %] for the month of<br/>
                                             [% hdr.$id.sal_month2 %] [% hdr.$id.sal_year %] has been transferred to the<br/>
-                                            bank a/c [% hdr.$id.bank_acc %] of NBP<br/><br/><br/></b>
+                                            bank a/c [% hdr.$id.bank_acc %] of [% hdr.$id.pymt_type %]<br/><br/><br/></b>
                                         Prepared by: Shahid Taj<br/>
                                         Accountant Jr., Accounts Department<br/><br/><br/>
                                         This is computer generated document<br/> 
