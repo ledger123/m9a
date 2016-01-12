@@ -257,8 +257,8 @@ my $sal_date = $dbs->query(qq|
        hr_salary.created_by,
        sysdate as print_date,
        DECODE(hr_emp.scale, '00', 'Contractual', 'Regular') emp_type,
-       (SELECT SUM(inc_tax) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') inc_tax_ytd,
-       (SELECT SUM(absents) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2014') absents_ytd,
+       (SELECT SUM(inc_tax) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2015') inc_tax_ytd,
+       (SELECT SUM(absents) FROM hr_salary WHERE hr_salary.emp_num = hr_emp.emp_num AND sal_date >= '01-jul-2015') absents_ytd,
        (SELECT NVL(SUM(debit_amt-credit_amt),0)*-1 FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_fund_acc AND je_date >= '1-jul-2013' and je_date <= '$sal_date' and closed='N') fund_balance,
        (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc AND je_date >='1-jul-2013' and je_date <= '$sal_date' and closed='N') temp_advance,
        (SELECT NVL(SUM(debit_amt-credit_amt),0) FROM hr_gllines WHERE hr_gllines.acc_num = hr_emp.gl_adv_acc2 AND je_date >='1-jul-2013' and je_date <= '$sal_date' and closed='N') perm_advance,
@@ -268,7 +268,7 @@ my $sal_date = $dbs->query(qq|
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND TO_CHAR(hr_salary.sal_date,'MM-RR') = TO_CHAR(tr_date, 'MM-RR') AND etype = 'Eid/Christmas 2') eid_christmas2,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND TO_CHAR(hr_salary.sal_date,'MM-RR') = TO_CHAR(tr_date, 'MM-RR') AND etype = 'Leave Payment') leave_payment,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND TO_CHAR(hr_salary.sal_date,'MM-RR') = TO_CHAR(tr_date, 'MM-RR') AND etype = 'Other') other,
-       (SELECT NVL(SUM(amount),0) FROM hr_advtax WHERE hr_advtax.emp_num = hr_salary.emp_num) adv_tax
+       (SELECT NVL(SUM(amount),0) FROM hr_advtax WHERE hr_advtax.emp_num = hr_salary.emp_num AND tr_date >= '01-jul-2015') adv_tax
   FROM hr_salary, hr_emp2 hr_emp, hr_depts
 WHERE (hr_salary.books_id = 1)
       AND (hr_salary.books_id = hr_emp.books_id)
