@@ -268,7 +268,7 @@ my $sal_date = $dbs->query(qq|
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND TO_CHAR(hr_salary.sal_date,'MM-RR') = TO_CHAR(tr_date, 'MM-RR') AND etype = 'Eid/Christmas 2') eid_christmas2,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND TO_CHAR(hr_salary.sal_date,'MM-RR') = TO_CHAR(tr_date, 'MM-RR') AND etype = 'Leave Payment') leave_payment,
        (SELECT NVL(SUM(amount),0) FROM hr_extraincome WHERE hr_extraincome.emp_num = hr_salary.emp_num AND TO_CHAR(hr_salary.sal_date,'MM-RR') = TO_CHAR(tr_date, 'MM-RR') AND etype = 'Other') other,
-       (SELECT NVL(SUM(amount),0) FROM hr_advtax WHERE hr_advtax.emp_num = hr_salary.emp_num AND tr_date >= '01-jul-2015') adv_tax
+       (SELECT NVL(SUM(amount),0) FROM hr_advtax WHERE hr_advtax.emp_num = hr_salary.emp_num AND tr_date >= '01-jul-2016') adv_tax
   FROM hr_salary, hr_emp2 hr_emp, hr_depts
 WHERE (hr_salary.books_id = 1)
       AND (hr_salary.books_id = hr_emp.books_id)
